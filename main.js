@@ -63,7 +63,7 @@ var myChart = new Chart(ctx, {
 
 let canvas = document.querySelector("canvas");
 
-canvas.onclick = function(evt) {
+canvas.onclick = evt => {
   var activePoint = myChart.getElementAtEvent(evt)[0];
   var data = activePoint._chart.data;
   var datasetIndex = activePoint._datasetIndex;
