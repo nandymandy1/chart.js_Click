@@ -5,7 +5,7 @@ var myChart = new Chart(ctx, {
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
     datasets: [
       {
-        label: "# of Votes",
+        label: "Number of Votes",
         data: [12, 19, 3, 5, 2, 3],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -26,7 +26,7 @@ var myChart = new Chart(ctx, {
         borderWidth: 1
       },
       {
-        label: "# of People",
+        label: "Number of People",
         data: [10, 5, 2, 12, 18],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
@@ -64,10 +64,15 @@ var myChart = new Chart(ctx, {
 let canvas = document.querySelector("canvas");
 
 canvas.onclick = evt => {
-  var activePoint = myChart.getElementAtEvent(evt)[0];
-  var data = activePoint._chart.data;
-  var datasetIndex = activePoint._datasetIndex;
-  var label = data.datasets[datasetIndex].label;
-  var value = data.datasets[datasetIndex].data[activePoint._index];
-  console.log(label, value);
+  try {
+    let activePoint = myChart.getElementAtEvent(evt)[0];
+    let datasetIndex = activePoint._datasetIndex;
+    let data = activePoint._chart.data;
+    let title = data.datasets[datasetIndex].label;
+    let value = data.datasets[datasetIndex].data[activePoint._index];
+    let label = data.labels[datasetIndex];
+    console.log(`${label}: ${value}, Title: ${title}`);
+  } catch (err) {
+    console.log("Unable to grab the dataset.", err);
+  }
 };
